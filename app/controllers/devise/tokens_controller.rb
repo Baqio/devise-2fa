@@ -23,7 +23,7 @@ class Devise::TokensController < DeviseController
   def update
     enabled = (params[resource_name][:otp_enabled] == '1')
     if enabled ? resource.enable_otp! : resource.disable_otp!
-      otp_set_flash_message :success, :successfully_updated
+      otp_set_flash_message :notice, :successfully_updated
     end
     render :show
   end
@@ -33,7 +33,7 @@ class Devise::TokensController < DeviseController
   #
   def destroy
     if resource.reset_otp_credentials!
-      otp_set_flash_message :success, :successfully_reset_creds
+      otp_set_flash_message :notice, :successfully_reset_creds
     end
     render :show
   end
@@ -43,7 +43,7 @@ class Devise::TokensController < DeviseController
   #
   def get_persistence
     if otp_set_trusted_device_for(resource)
-      otp_set_flash_message :success, :successfully_set_persistence
+      otp_set_flash_message :notice, :successfully_set_persistence
     end
     redirect_to action: :show
   end
@@ -53,7 +53,7 @@ class Devise::TokensController < DeviseController
   #
   def clear_persistence
     if otp_clear_trusted_device_for(resource)
-      otp_set_flash_message :success, :successfully_cleared_persistence
+      otp_set_flash_message :notice, :successfully_cleared_persistence
     end
 
     redirect_to action: :show

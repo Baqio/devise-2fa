@@ -43,7 +43,7 @@ class Devise::CredentialsController < DeviseController
       redirect_to new_session_path(resource_name)
     else
       if resource.otp_challenge_valid? && resource.validate_otp_token(params[resource_name][:token], recovery)
-        set_flash_message(:success, :signed_in) if is_navigational_format?
+        set_flash_message(:notice, :signed_in) if is_navigational_format?
         sign_in(resource_name, resource)
 
         otp_refresh_credentials_for(resource)
@@ -88,7 +88,7 @@ class Devise::CredentialsController < DeviseController
 
   def done_valid_refresh
     otp_refresh_credentials_for(resource)
-    otp_set_flash_message :success, :valid_refresh if is_navigational_format?
+    otp_set_flash_message :notice, :valid_refresh if is_navigational_format?
 
     respond_with resource, location: otp_fetch_refresh_return_url
   end
