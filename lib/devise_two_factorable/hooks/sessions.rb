@@ -22,6 +22,7 @@ module DeviseTwoFactorable::Hooks
         sign_in(resource_name, resource)
         respond_with resource, location: token_path_for(resource)
       else
+        devise_stored_location = stored_location_for(resource) # Grab the current stored location before it gets lost by warden.logout
         super
       end
     end
