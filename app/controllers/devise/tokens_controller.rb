@@ -78,7 +78,11 @@ class Devise::TokensController < DeviseController
       format.html
       format.js
       format.text do
-        send_data render_to_string(template: 'devise/tokens/recovery_codes.text.erb'), filename: 'recovery-codes.txt'
+        send_data render_to_string(
+          template: 'devise/tokens/recovery_codes',
+          formats: [:text],
+          layout: false,
+        ), filename: 'recovery-codes.txt'
       end
     end
   end
